@@ -1,8 +1,8 @@
 # Project1
 Project 1 Starter Code
 
-Names:
-Team Name:
+Names:Abigail and Alex
+Team Name: Team 
 
 Your primary tasks will be to:
 
