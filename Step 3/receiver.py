@@ -25,7 +25,8 @@ while True:
 
     if incoming is not None: # message was received
         mb.display.show(mb.Image.HEART, delay=100, clear=True, wait=False)
-        print(incoming)
+        x = incoming.split(' ')
+        print(tuple(x))
 
 
         mb.sleep(10)
