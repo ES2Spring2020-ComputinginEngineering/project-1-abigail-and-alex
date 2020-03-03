@@ -25,11 +25,11 @@ while not mb.button_a.is_pressed():
     ######################################################
     # FILL In HERE
     # Need to collect accelerometer and time measurements
-    time= microbit.running_time()
-    X=microbit.accelerometer.get_x()
-    Y=microbit.accelerometer.get_y()
-    Z=microbit.accelerometer.get_z()
-    message= str(time)+ str(X) +str(Y)+ str(Z)
+    time= mb.running_time()
+    X=mb.accelerometer.get_x()
+    Y=mb.accelerometer.get_y()
+    Z=mb.accelerometer.get_z()
+    message= str(time)+ " "+str(X)+ " " +str(Y)+ " "+ str(Z)
     # Need to format into a single string
     # Send the string over the radio
     ######################################################
