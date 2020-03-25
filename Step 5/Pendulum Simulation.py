@@ -17,7 +17,7 @@ def update_system(acc,pos,vel,time1,time2,length):
     dt = time2-time1
     posNext = pos+vel*dt
     velNext = vel+acc*dt
-    accNext = -9.8*math.sin(posNext)/l
+    accNext = -9.8*math.sin(pos)/l
     return posNext,velNext,accNext
 
 def print_system(time,pos,vel,acc):
@@ -31,7 +31,7 @@ l = 5*0.0254
 theta = math.pi/2
 pos = [theta]
 vel = [0]
-acc = [0,-9.8*math.sin(theta)/l]
+acc = [-9.8*math.sin(theta)/l]
 time = np.linspace(0,10,201)
 
 
@@ -49,7 +49,7 @@ while i < len(time):
     i += 1
 
 
-plt.plot(t,vel)
 plt.plot(t,pos)
+plt.plot(t,vel)
 plt.plot(t,acc)
 plt.show()
