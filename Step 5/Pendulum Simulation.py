@@ -31,8 +31,8 @@ l = 5*0.0254
 theta = math.pi/2
 pos = [theta]
 vel = [0]
-acc = [-9.8*math.sin(theta)/l]
-time = np.linspace(0,10,201)
+acc = [0,-9.8*math.sin(theta)/l]
+time = np.linspace(0,10,200001)
 
 
 print_system(time[0],pos[0],vel[0],acc[0])
@@ -40,7 +40,7 @@ i = 1
 t=[0]
 while i < len(time):
     # update position and velocity using previous values and time step
-    posNext, velNext, accNext = update_system(acc[i-1],pos[i-1],vel[i-1],time[i-1],time[i],l)
+    posNext, velNext, accNext = update_system(acc[i],pos[i-1],vel[i-1],time[i-1],time[i],l)
     pos.append(posNext)
     vel.append(velNext)
     acc.append(accNext)
