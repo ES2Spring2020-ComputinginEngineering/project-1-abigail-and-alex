@@ -7,6 +7,8 @@ Created on Fri Mar  6 11:08:40 2020
 import numpy as np
 import matplotlib.pyplot as plt
 import math 
+import scipy.signal as sig
+
 
 # GLOBAL VARIABLES
 lengths=np.array([5,9,13,17.25, 21.25])*0.0254
@@ -31,16 +33,15 @@ l = 5*0.0254
 theta = math.pi/2
 pos = [theta]
 vel = [0]
-acc = [0,-9.8*math.sin(theta)/l]
+acc = [-9.8*math.sin(theta)/l]
 time = np.linspace(0,10,200001)
 
 
-print_system(time[0],pos[0],vel[0],acc[0])
 i = 1
 t=[0]
 while i < len(time):
     # update position and velocity using previous values and time step
-    posNext, velNext, accNext = update_system(acc[i],pos[i-1],vel[i-1],time[i-1],time[i],l)
+    posNext, velNext, accNext = update_system(acc[i-1],pos[i-1],vel[i-1],time[i-1],time[i],l)
     pos.append(posNext)
     vel.append(velNext)
     acc.append(accNext)
@@ -49,7 +50,32 @@ while i < len(time):
     i += 1
 
 
-plt.plot(t,pos)
-plt.plot(t,vel)
-plt.plot(t,acc)
+plt.plot(t,pos,color="green")
 plt.show()
+plt.plot(t,vel,"red")
+plt.show()
+plt.plot(t,acc, "blue")
+plt.show()
+
+
+peaks = sig.find_peaks(pos)
+peaks = tuple(peaks[0])
+old_max = 0
+new_max = 0
+counter = 0
+time_of_periods = 0
+
+for i in range(len(pos)):
+    if(i == peaks[counter]):
+        if(counter == len(peaks)-1):
+            break
+        if(counter == 0):
+            old_max = pos[i]
+        new_max = pos[i]
+        counter +=1
+        time_of_periods += (new_max - old_max)
+        old_max = pos[i]
+time_of_periods = time_of_periods / (len(peaks)-1)
+time_of_periods *=1000
+print(time_of_periods)
+
