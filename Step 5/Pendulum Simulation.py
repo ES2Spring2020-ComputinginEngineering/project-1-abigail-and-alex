@@ -29,7 +29,7 @@ def print_system(time,pos,vel,acc):
     print("ACCELERATION ", acc, "\n")
 
 # initial conditions
-l = 5*0.0254
+l = .5#5*0.0254
 theta = math.pi/2
 pos = [theta]
 vel = [0]
@@ -70,12 +70,13 @@ for i in range(len(pos)):
         if(counter == len(peaks)-1):
             break
         if(counter == 0):
-            old_max = pos[i]
-        new_max = pos[i]
+            old_max = i
+        new_max = i
         counter +=1
         time_of_periods += (new_max - old_max)
-        old_max = pos[i]
+        print(time_of_periods)
+        old_max = i
 time_of_periods = time_of_periods / (len(peaks)-1)
-time_of_periods *=1000
-print(time_of_periods)
+time_of_periods /= len(pos)
 
+print(time_of_periods)
