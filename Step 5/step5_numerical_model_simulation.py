@@ -88,7 +88,7 @@ def wave_period(pos):
     sum = 0
     for i in range(len(per)):
         sum += per[i]
-    #You have to convert this time into seconds. I think this is the way to do it.
+    #Converts Arbitrary Time into seconds
     sum = sum/(len(peaks)-1)
     sum /= len(pos)
     
