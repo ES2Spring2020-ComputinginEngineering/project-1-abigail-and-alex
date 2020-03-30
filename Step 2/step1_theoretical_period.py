@@ -32,7 +32,7 @@ def estimated_period (length):
 #The main script finds the estimated period for the array lengths, and graphs the length vs the period of the pendulum.
 period = estimated_period(lengths)
 
-plt.plot(lengths,period)
+plt.scatter(lengths,period)
 plt.xlabel('Length of Pendulum (in meters)')
 plt.ylabel('Period of Pendulum (in seconds)')
 plt.title('Length vs Period of a Pendulum')
