@@ -1,9 +1,14 @@
-# -*- coding: utf-8 -*-
-"""
-Created on Fri Mar  6 11:08:40 2020
+# Project 1 --- ES2
+# Step 5: Numerical Simulation
 
-@author: alexb
-"""
+#*****************************************
+#
+# YOUR NAMES: Abigail Imiolek and Alex Bayzk
+#
+#*****************************************
+
+
+# IMPORT STATEMENTS
 import numpy as np
 import matplotlib.pyplot as plt
 import math 
@@ -15,7 +20,9 @@ lengths=np.array([5,9,13,17.25, 21.25])*0.0254
 
 
 def update_system(acc,pos,vel,time1,time2,length):
-    # position and velocity update below
+#This function takes six arguments, six floats: the acceleration, position, velocity, and the length at the times gives
+#This function uses the Euler method to find the position, velocity, and calculates the next acceleration
+#This function returns the found values for the position, velocity, and acceleration.
     dt = time2-time1
     posNext = pos+vel*dt
     velNext = vel+acc*dt
@@ -23,6 +30,9 @@ def update_system(acc,pos,vel,time1,time2,length):
     return posNext,velNext,accNext
 
 def print_system(time,pos,vel,acc):
+#This function takes four arguments, time, position, velocity, and acceleration
+#It prints the values for each of the four variables
+#The function has no return value.
     print("TIME:     ", time)
     print("POSITION: ", pos)
     print("VELOCITY: ", vel)
@@ -63,7 +73,7 @@ def wave_period(pos):
 
 # initial conditions
 l = .5
-theta = math.pi/2
+theta = math.pi/3
 pos = [theta]
 vel = [0]
 acc = [-9.8*math.sin(theta)/l]
@@ -73,7 +83,7 @@ time = np.linspace(0,10,200001)
 i = 1
 t=[0]
 while i < len(time):
-    # update position and velocity using previous values and time step
+# Updates position, velocity, and acceleration using previous values and time steps
     posNext, velNext, accNext = update_system(acc[i-1],pos[i-1],vel[i-1],time[i-1],time[i],l)
     pos.append(posNext)
     vel.append(velNext)
@@ -82,12 +92,27 @@ while i < len(time):
     #print_system(time[i],pos[i],vel[i],acc[i])
     i += 1
 
-
+#Graphs position, velocity, and acceleration vs time
 plt.plot(t,pos,color="green")
-plt.show()
-plt.plot(t,vel,"red")
-plt.show()
-plt.plot(t,acc, "blue")
+plt.xlabel('Time (in milliseconds)')
+plt.ylabel('Position of Pendulum (in theta)')
+plt.title('Position of Pendulum vs Time')
 plt.show()
 
-print("period ", wave_period(pos))
+plt.plot(t,vel,"red")
+plt.xlabel('Time (in milliseconds)')
+plt.ylabel('Velocity of Pendulum (in theta per second)')
+plt.title('Velocity of Pendulum vs Time')
+plt.show()
+
+plt.plot(t,acc, "blue")
+plt.xlabel('Time (in milliseconds)')
+plt.ylabel('Acceleration of Pendulum (in theta per second squared)')
+plt.title('Acceleration of Pendulum vs Time')
+plt.show()
+
+plt.scatter(l,wave_period(pos))
+plt.xlabel('Lengths (in meters)')
+plt.ylabel('Period (in seconds)')
+plt.title('Period vs Length')
+plt.show()
