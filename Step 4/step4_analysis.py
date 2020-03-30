@@ -75,6 +75,7 @@ def Period_of_Wave(file):
     data = np.loadtxt(file, delimiter = ",")
     t = data[0:,0]
     x = data[0:,1]
+    print(t)
     smoothed = sig.medfilt(x)
     peaks = sig.find_peaks(smoothed)
     new_peaks = tuple(peaks[0])
