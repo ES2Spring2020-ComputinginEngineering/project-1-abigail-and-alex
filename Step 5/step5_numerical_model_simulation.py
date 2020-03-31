@@ -40,6 +40,11 @@ def print_system(time,pos,vel,acc):
     print("ACCELERATION ", acc, "\n")
     
 def new_functions(theta,length, len_name, theta_name):
+#This function takes four arguments, two floats: time and position and two strings: the name of the length of the string, and the theta.
+#The graph applies update_system() to calculate the position, velocity, and acceleration for the functions given.
+#It then graphs the functions.
+#The function returns list of the positions.
+    
     pos = [theta]
     vel = [0]
     acc = [-9.8*math.sin(theta)/length]
@@ -47,15 +52,12 @@ def new_functions(theta,length, len_name, theta_name):
     i = 1
     t=[0]
     while i < len(time):
-    # Updates position, velocity, and acceleration using previous values and time steps
         posNext, velNext, accNext = update_system(acc[i-1],pos[i-1],vel[i-1],time[i-1],time[i],length)
         pos.append(posNext)
         vel.append(velNext)
         acc.append(accNext)
         t.append(i)
-        #print_system(time[i],pos[i],vel[i],acc[i])
         i += 1
-        #Graphs position, velocity, and acceleration vs time
     plt.plot(t,pos,color="green", label='Position of Pendulum (in theta)')
     plt.plot(t,vel,"red", label='Velocity of Pendulum (in theta per second)')
     plt.plot(t,acc, "blue", label='Acceleration of Pendulum (in theta per second squared)')
@@ -65,6 +67,9 @@ def new_functions(theta,length, len_name, theta_name):
     return pos
 
 def wave_period(pos):
+#The function takes one argument, list of the positions.
+#It uses the positions to find the difference between peaks and calculate the period.
+#The function returns the value of the period.
     peaks = sig.find_peaks(pos)
     peaks = tuple(peaks[0])
     old_max = 0
@@ -91,10 +96,12 @@ def wave_period(pos):
     #Converts Arbitrary Time into seconds
     sum = sum/(len(peaks)-1)
     sum /= len(pos)
-    
     return sum
         
 def period_length(pos1, pos2, pos3, pos4, pos5):
+#The function takes five arguments, lists of the positions.
+#It calls the wave_period() function for all five lists, and then graphs the period vs lengths.
+#The function has no return value.
     p1=wave_period(pos1)
     p2=wave_period(pos2)
     p3=wave_period(pos3)
@@ -110,7 +117,7 @@ def period_length(pos1, pos2, pos3, pos4, pos5):
     plt.title('Period vs Length')
     plt.show()
 
-
+#MAIN SCRIPT
 x1=new_functions(math.pi/4,5*0.0254, " 1", "pi/4")
 x11=new_functions(3*math.pi/4,5*0.0254, " 1" , "3pi/4")
 

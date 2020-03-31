@@ -1,3 +1,12 @@
+# Project 1 --- ES2
+# Step 5: Numerical Simulation
+
+#*****************************************
+#
+# YOUR NAMES: Abigail Imiolek and Alex Bayzk
+#
+#*****************************************
+
 # IMPORT STATEMENTS
 import numpy as np
 import matplotlib.pyplot as plt
@@ -30,6 +39,9 @@ def print_system(time,pos,vel,acc):
     print("ACCELERATION ", acc, "\n")
     
 def new_functions(theta,length, descriptor):
+#The function takes one argument, list of the positions.
+#It uses the positions to find the difference between peaks and calculate the period.
+#The function returns the value of the period.
     pos = [theta]
     vel = [0]
     acc = [-9.8*math.sin(theta)/length]
@@ -37,33 +49,32 @@ def new_functions(theta,length, descriptor):
     i = 1
     t=[0]
     while i < len(time):
-    # Updates position, velocity, and acceleration using previous values and time steps
         posNext, velNext, accNext = update_system(acc[i-1],pos[i-1],vel[i-1],time[i-1],time[i],length)
         pos.append(posNext)
         vel.append(velNext)
         acc.append(accNext)
         t.append(i)
-        #print_system(time[i],pos[i],vel[i],acc[i])
         i += 1
-        #Graphs position, velocity, and acceleration vs time
         
     plt.plot(t,pos,color="green", label='Position of Pendulum (in theta)')
-    plt.plot(t,vel,"red", label='Velocity of Pendulum (in theta per second)')
     plt.plot(t,acc, "blue", label='Acceleration of Pendulum (in theta per second squared)')
+    plt.plot(t,vel,"red", label='Velocity of Pendulum (in theta per second)')
     plt.title('Pendulum Function vs Time with ' + descriptor)
     plt.legend(loc="lower center")
     plt.show()
     return pos
 
 
+#MAIN SCRIPT
 new_functions(2*math.pi/3,.5, "Theta of 2pi/3")
 new_functions(math.pi,.5, "Theta of pi")
 
 time = np.linspace(0,10,2001)
-new_functions(math.pi/2,.5, "With Low Timestamp")
+new_functions(math.pi/2,.5, "With Low Time Step")
 
 time = np.linspace(0,120,200001)
-new_functions(math.pi/2,.5, "With Long Runtime" )
+series=new_functions(math.pi/2,.5, "With Long Runtime" )
+
 
 time = np.linspace(0,10,200000000001)
-new_functions(math.pi/2,.5, "With High Timestamp")
+new_functions(math.pi/2,.5, "With High Time Step")
